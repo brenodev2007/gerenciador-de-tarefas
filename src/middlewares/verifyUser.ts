@@ -43,6 +43,7 @@ export const verifyUser = (
       }
 
       req.headers = decoded;
+      console.log(decoded);
 
       next();
     }
