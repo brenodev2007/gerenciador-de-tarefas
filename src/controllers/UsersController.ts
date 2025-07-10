@@ -17,7 +17,7 @@ export class UserController {
 
       const hashedPassword = await hash(password, 8);
 
-      const user = prisma.user.create({
+      const user = await prisma.user.create({
         data: {
           name,
           email,
