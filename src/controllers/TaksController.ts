@@ -11,8 +11,8 @@ export class TasksController {
         title: z.string().min(1).max(50),
         description: z.string().min(1).max(200),
         status: z.enum(["pending", "in_progress", "completed"]), // ✅ Enum validado aqui
-        teamId: z.string().uuid(),
-        assignedTo: z.string().cuid(),
+        teamId: z.string(),
+        assignedTo: z.string(),
       });
 
       const { title, description, status, teamId, assignedTo } =
@@ -38,5 +38,38 @@ export class TasksController {
     } catch (error) {
       next(error);
     }
+  };
+
+  index = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const task = await prisma.task.findMany({
+        include: {
+          team: true,
+          user: true,
+        },
+      });
+
+      res.json(task);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  show = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+    const task = await prisma.task.findUnique({
+      where: { id },
+      include: {
+        user: true,
+        team: true,
+      },
+    });
+
+    if (!task) {
+      return res.status(404).json({ error: "Task não encontrada" });
+    }
+
+    res.json(task);
   };
 }
