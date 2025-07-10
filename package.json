@@ -1,0 +1,26 @@
+{
+  "name": "gerenciador-de-tarefas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^17.2.0",
+    "prisma": "^6.11.1"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "@types/typescript": "^2.0.0",
+    "express": "^5.1.0",
+    "express-async-error": "^0.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "zod": "^4.0.2"
+  }
+}
