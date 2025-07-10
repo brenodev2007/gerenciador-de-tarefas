@@ -60,6 +60,7 @@ model teamMembers{
   user User @relation(fields: [userId], references: [id])
   team teams @relation(fields: [teamId], references: [id])
 
+  @@unique([userId, teamId])
   @@map("team_members")
 }
 
