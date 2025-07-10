@@ -7,3 +7,4 @@ const taskController = new TasksController();
 
 taskRouter.post("/create", taskController.create);
 taskRouter.get("/index", taskController.index);
+taskRouter.get("/show/:id", taskController.show);
