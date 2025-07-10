@@ -5,4 +5,4 @@ export const teamsRoutes = Router();
 
 const teamsController = new TeamsController();
 
-teamsRoutes.post("/", teamsController.create);
+teamsRoutes.post("/create", teamsController.create);

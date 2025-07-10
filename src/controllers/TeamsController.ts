@@ -18,5 +18,7 @@ export class TeamsController {
         description,
       },
     });
+
+    res.json(teams);
   };
 }
