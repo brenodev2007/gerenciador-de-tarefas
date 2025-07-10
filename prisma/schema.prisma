@@ -13,3 +13,67 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum UserRole{
+  Admin
+  member
+}
+
+enum TaskStatus{
+  pending
+  in_progress
+  completed
+}
+
+model User{
+  id String @id @default(cuid())
+  name String
+  email String @unique
+  passoword String
+  role UserRole @default(member)
+  createdAt DateTime @default(now()) @map("created_at")
+  UpdatedAt DateTime @default(now()) @map("uptadet_at")
+
+  teamMember teamMembers[]
+  tasks Task[]
+
+  @@map("users")
+}
+
+model teams{
+  id String @id @default(cuid())
+  name String 
+  description String
+  createdAt DateTime @default(now()) @map("created_at")
+  UpdatedAt DateTime @default(now()) @map("uptadet_at")
+
+  teamMember teamMembers[]
+  tasks Task[]
+
+  @@map("teams")
+}
+
+model teamMembers{
+  id String @id @default(cuid())
+  userId String @map("user_id")
+  teamId String @map("team_id")
+  user User @relation(fields: [userId], references: [id])
+  team teams @relation(fields: [teamId], references: [id])
+
+  @@map("team_members")
+}
+
+model Task{
+  id String @id @default(cuid())
+  title String
+  description String
+  status TaskStatus @default(pending)
+  assignedTo String @map("assigned_to")
+  user User @relation(fields: [assignedTo], references: [id])
+
+  teamId String @map("team_id")
+  team teams @relation(fields: [teamId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  UpdatedAt DateTime @default(now()) @map("uptadet_at")
+}
