@@ -29,7 +29,7 @@ model User{
   id String @id @default(cuid())
   name String
   email String @unique
-  passoword String
+  password String
   role UserRole @default(member)
   createdAt DateTime @default(now()) @map("created_at")
   UpdatedAt DateTime @default(now()) @map("uptadet_at")
