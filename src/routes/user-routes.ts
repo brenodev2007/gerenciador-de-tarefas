@@ -5,4 +5,4 @@ export const usersRoutes = Router();
 
 const usersController = new UserController();
 
-usersRoutes.post("/", usersController.create);
+usersRoutes.post("/create", usersController.create);
